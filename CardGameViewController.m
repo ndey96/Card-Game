@@ -9,29 +9,42 @@
 #import "CardGameViewController.h"
 
 @interface CardGameViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
+@property (nonatomic) int flipCount;
+@property (strong, nonatomic) PlayingCardDeck *playingCardDeck;
 
 @end
 
 @implementation CardGameViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (IBAction)touchCardButton:(UIButton *)sender {
+    
+    if ([sender.currentTitle length]){
+        UIImage *image = [UIImage imageNamed:@"cardBack"];
+        [sender setTitle:@"" forState:UIControlStateNormal];
+        [sender setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    else {
+        UIImage *image = [UIImage imageNamed:@"cardFront"];
+        Card* card = [self.playingCardDeck drawRandomCard];
+        NSString *cardContents = card.contents;
+        [sender setTitle:cardContents forState:UIControlStateNormal];
+        [sender setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    self.flipCount++;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) setFlipCount:(int)flipCount{
+    _flipCount = flipCount;
+    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (PlayingCardDeck*)playingCardDeck {
+    if (!_playingCardDeck){
+        _playingCardDeck = [[PlayingCardDeck alloc] init];
+    }
+    return _playingCardDeck;
 }
-*/
-
+                                  
+                                  
 @end

@@ -28,10 +28,7 @@
     else {
         [self.cards addObject:card];
     }
-    
 }
-
-
 
 - (void)addCard:(Card*)card{
     [self addCard:card atTop:NO];
