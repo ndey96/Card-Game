@@ -93,7 +93,14 @@
 		300912A31AC9DCC400099EBD /* Card Game */ = {
 			isa = PBXGroup;
 			children = (
-				30C042AC1ACC85E3007823E7 /* Model */,
+				30C042A21ACC4350007823E7 /* PlayingCard.h */,
+				30C042A31ACC4350007823E7 /* PlayingCard.m */,
+				30C0429C1ACC42EB007823E7 /* Card.h */,
+				30C0429D1ACC42EB007823E7 /* Card.m */,
+				30C042A51ACC4852007823E7 /* Deck.h */,
+				30C042A61ACC4852007823E7 /* Deck.m */,
+				30C042A81ACC779B007823E7 /* PlayingCardDeck.h */,
+				30C042A91ACC779B007823E7 /* PlayingCardDeck.m */,
 				300912CA1AC9DECB00099EBD /* CardGameViewController.h */,
 				300912CB1AC9DECB00099EBD /* CardGameViewController.m */,
 				300912AE1AC9DCC400099EBD /* Main.storyboard */,
@@ -130,21 +137,6 @@
 				300912BF1AC9DCC400099EBD /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		30C042AC1ACC85E3007823E7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				30C042A21ACC4350007823E7 /* PlayingCard.h */,
-				30C042A31ACC4350007823E7 /* PlayingCard.m */,
-				30C0429C1ACC42EB007823E7 /* Card.h */,
-				30C0429D1ACC42EB007823E7 /* Card.m */,
-				30C042A51ACC4852007823E7 /* Deck.h */,
-				30C042A61ACC4852007823E7 /* Deck.m */,
-				30C042A81ACC779B007823E7 /* PlayingCardDeck.h */,
-				30C042A91ACC779B007823E7 /* PlayingCardDeck.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
