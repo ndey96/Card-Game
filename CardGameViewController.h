@@ -10,4 +10,6 @@
 
 @interface CardGameViewController : UIViewController
 
+- (void)updateUI;
+
 @end
