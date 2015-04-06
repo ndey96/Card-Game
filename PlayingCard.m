@@ -9,7 +9,20 @@
 
 @implementation PlayingCard
 
-@synthesize suit = _suit;
+- (int) match:(NSArray *)otherCards{
+    
+    int score = 0;
+    
+    if ([otherCards count] == 1){
+        PlayingCard *otherCard = [otherCards firstObject];
+            if (self.suit == otherCard.suit) {
+                score = 1;
+            } else if (self.rank == otherCard.rank){
+                score = 4;
+            }
+    }
+    return score;
+}
 
 - (NSString*)contents{
 
@@ -17,6 +30,8 @@
     return [rankStrings[self.rank] stringByAppendingString:self.suit];
 
 }
+
+@synthesize suit = _suit;
 
 + (NSArray*)validSuits{
     return @[@"♠︎", @"♣︎", @"♥︎", @"♦︎"];
@@ -45,6 +60,5 @@
     if (rank <= [PlayingCard maxRank]){
         _rank = rank;
     }
-    
 }
 @end
