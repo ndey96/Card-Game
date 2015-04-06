@@ -130,6 +130,21 @@
                                     <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hI7-mh-xfT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Rk-HB-Sgp">
+                                <rect key="frame" x="197" y="179" width="64" height="96"/>
+                                <state key="normal" backgroundImage="cardBack">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="240" y="132" width="64" height="96"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="232" y="28" width="64" height="96"/>
+                                </variation>
+                                <connections>
+                                    <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tBE-gf-vSc"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKc-fc-CEH">
                                 <rect key="frame" x="197" y="179" width="64" height="96"/>
                                 <state key="normal" backgroundImage="cardBack">
@@ -289,21 +304,15 @@
                                     <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hKz-rs-c8S"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Rk-HB-Sgp">
-                                <rect key="frame" x="197" y="179" width="64" height="96"/>
-                                <state key="normal" backgroundImage="cardBack">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iE5-0K-GDC">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="240" y="132" width="64" height="96"/>
+                                    <rect key="frame" x="16" y="559" width="368" height="21"/>
                                 </variation>
-                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="232" y="28" width="64" height="96"/>
-                                </variation>
-                                <connections>
-                                    <action selector="touchCardButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tBE-gf-vSc"/>
-                                </connections>
-                            </button>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
@@ -315,6 +324,7 @@
                                 <exclude reference="5Ew-D1-94U"/>
                                 <exclude reference="oW8-Pk-4ry"/>
                                 <exclude reference="2P8-lo-olg"/>
+                                <exclude reference="6Rk-HB-Sgp"/>
                                 <exclude reference="JKc-fc-CEH"/>
                                 <exclude reference="4vE-RM-MLF"/>
                                 <exclude reference="BOI-FU-Oi3"/>
@@ -326,7 +336,7 @@
                                 <exclude reference="OJY-38-TK1"/>
                                 <exclude reference="PFe-Lc-V9l"/>
                                 <exclude reference="e7t-3l-yzg"/>
-                                <exclude reference="6Rk-HB-Sgp"/>
+                                <exclude reference="iE5-0K-GDC"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -338,6 +348,7 @@
                                 <include reference="5Ew-D1-94U"/>
                                 <include reference="oW8-Pk-4ry"/>
                                 <include reference="2P8-lo-olg"/>
+                                <include reference="6Rk-HB-Sgp"/>
                                 <include reference="JKc-fc-CEH"/>
                                 <include reference="4vE-RM-MLF"/>
                                 <include reference="BOI-FU-Oi3"/>
@@ -349,11 +360,12 @@
                                 <include reference="OJY-38-TK1"/>
                                 <include reference="PFe-Lc-V9l"/>
                                 <include reference="e7t-3l-yzg"/>
-                                <include reference="6Rk-HB-Sgp"/>
+                                <include reference="iE5-0K-GDC"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="scoreLabel" destination="iE5-0K-GDC" id="x6f-va-7YF"/>
                         <outletCollection property="cardButtons" destination="yil-WG-6J0" id="tjZ-qa-QYR"/>
                         <outletCollection property="cardButtons" destination="kKv-4Y-O9P" id="t1D-G3-kdl"/>
                         <outletCollection property="cardButtons" destination="qGF-2H-QnM" id="opm-ZL-yGF"/>
