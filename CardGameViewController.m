@@ -20,6 +20,11 @@
 @end
 
 @implementation CardGameViewController
+- (IBAction)touchResetButton:(id)sender {
+    self.game = nil;
+    self.deck = nil;
+    [self updateUI];
+}
 
 - (CardMatchingGame*)game{
     if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
