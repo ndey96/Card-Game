@@ -76,5 +76,9 @@ static const int COST_TO_CHOOSE = 1;
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
+- (NSInteger)matchMode{
+    if(!_matchMode) _matchMode = 2;
+    return _matchMode;
+}
 
 @end
