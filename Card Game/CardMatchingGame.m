@@ -9,8 +9,11 @@
 #import "CardMatchingGame.h"
 
 @interface CardMatchingGame()
+
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic) NSMutableArray *cards;
+@property (nonatomic, readwrite) NSInteger flipCount;
+
 @end
 
 @implementation CardMatchingGame
@@ -43,6 +46,9 @@ static const int COST_TO_CHOOSE = 1;
     return self;
 }
 - (void)chooseCardAtIndex:(NSUInteger)index{
+    
+    self.flipCount++;
+    
     Card* card = [self cardAtIndex:index];
     if (!card.isMatched){
         if (card.isChosen){
@@ -60,9 +66,7 @@ static const int COST_TO_CHOOSE = 1;
             
             if ([currentCardsChosen count] == self.matchMode - 1){
                 int matchScore = [card match:currentCardsChosen];
-                NSLog(@"%i", matchScore);
                 if (matchScore){
-                    NSLog(@"rekt");
                     self.score += matchScore * MATCH_BONUS;
                     for (Card *otherCard in currentCardsChosen){
                         otherCard.isMatched = YES;
@@ -75,30 +79,6 @@ static const int COST_TO_CHOOSE = 1;
                     }
                 }
             }
-
-//            NSMutableArray *currentChosenCards = [[NSMutableArray alloc] init];
-//            for (Card *otherCard in self.cards) {
-//                if (otherCard.isChosen && !otherCard.isMatched) {
-//                    [currentChosenCards addObject:otherCard];
-//                }
-//            }
-//            
-//            if ([currentChosenCards count] == self.matchMode-1) {
-//                int matchScore = [card match:currentChosenCards];
-//                if (matchScore) {
-//                    self.score += matchScore * MATCH_BONUS;
-//                    for (Card *otherCard in currentChosenCards) {
-//                        otherCard.isMatched = YES;
-//                    }
-//                    card.isMatched = YES;
-//                } else {
-//                    self.score -= MISMATCH_PENALTY;
-//                    for (Card *otherCard in currentChosenCards) {
-//                        otherCard.isChosen = NO;
-//                    }
-//                }
-//            }
-
             
             self.score -= COST_TO_CHOOSE;
             card.isChosen = YES;

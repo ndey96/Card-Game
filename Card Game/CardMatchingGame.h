@@ -18,5 +18,6 @@
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic) NSInteger matchMode;
+@property (nonatomic, readonly) NSInteger flipCount;
 
 @end

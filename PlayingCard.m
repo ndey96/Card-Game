@@ -13,6 +13,8 @@
     
     int score = 0;
     
+    
+    //checks if chosen card matches with any of the card in otherCards
     for(PlayingCard *otherCard in otherCards){
         if (self.rank == otherCard.rank) {
             score += 4;
@@ -21,6 +23,7 @@
         }
     }
     
+    //checks if any of the card in otherCards match with each other
     NSMutableArray *otherCardsInCollection = [[NSMutableArray alloc] init];
     for (PlayingCard *otherCard in otherCardsInCollection){
         [otherCardsInCollection removeObject:otherCard];
@@ -46,7 +49,10 @@
 @synthesize suit = _suit;
 
 + (NSArray*)validSuits{
-    return @[@"♠︎", @"♣︎", @"♥︎", @"♦︎"];
+//    return @[@"♠︎", @"♣︎", @"♥︎", @"♦︎"];
+//    ♠️♣️♥️♦️
+    return @[@"♠️", @"♣️", @"♥️", @"♦️"];
+
 }
 
 - (void) setSuit:(NSString *)suit{

@@ -33,17 +33,6 @@
     [self updateUI];
 }
 
-- (CardMatchingGame*)game{
-    if (!_game){
-        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
-    }
-return _game;
-}
-
-- (Deck*)createDeck{
-    return [[PlayingCardDeck alloc] init];
-}
-
 - (IBAction)touchCardButton:(UIButton *)sender {
     NSUInteger cardIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:cardIndex];
@@ -51,6 +40,23 @@ return _game;
 }
 
 - (void) updateUI{
+    
+    //disable segmented control segment that is not selected when first card is flipped
+    if (self.game.flipCount == 1){
+        if (self.game.matchMode == 2){
+            [self.matchModeSegmentedControl setEnabled:NO forSegmentAtIndex:1];
+        } else if (self.game.matchMode == 3){
+            [self.matchModeSegmentedControl setEnabled:NO forSegmentAtIndex:0];
+        }
+
+    //enable segmented control when game is reset or before game starts
+    } else if (self.game.flipCount == 0){
+        for (int i = 0; i < self.matchModeSegmentedControl.numberOfSegments; i++){
+            [self.matchModeSegmentedControl setEnabled:YES forSegmentAtIndex:i];
+        }
+        [self.matchModeSegmentedControl setSelectedSegmentIndex:0];
+    }
+    
     for (UIButton *cardButton in self.cardButtons){
         NSUInteger cardIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardIndex];
@@ -67,6 +73,17 @@ return _game;
 
 - (UIImage*)backgroundImageForCard:(Card*)card{
     return [UIImage imageNamed:card.isChosen ? @"cardFront" : @"cardBack"];
+}
+
+- (CardMatchingGame*)game{
+    if (!_game){
+        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    }
+    return _game;
+}
+
+- (Deck*)createDeck{
+    return [[PlayingCardDeck alloc] init];
 }
 
 @end
