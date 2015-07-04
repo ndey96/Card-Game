@@ -18,25 +18,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *matchModeSegmentedControl;
 
+
 @end
 
 @implementation CardGameViewController
 
-//- (IBAction)matchModeSegmentedControlAction:(id)sender {
-//    if (self.matchModeSegmentedControl.selectedSegmentIndex == 0){
-//        //2 card match
-//        NSLog(@"2 card match mode");
-//        self.game.matchMode = 2;
-//    } else if (self.matchModeSegmentedControl.selectedSegmentIndex == 1){
-//        //3 card match
-//        NSLog(@"3 card match mode");
-//        self.game.matchMode = 3;
-//    } else {
-//        
-//    }
-//    
-//}
-
+- (IBAction)matchModeChanged:(id)sender {
+    self.game.matchMode = self.matchModeSegmentedControl.selectedSegmentIndex + 2;
+}
 
 - (IBAction)touchResetButton:(id)sender {
     self.game = nil;

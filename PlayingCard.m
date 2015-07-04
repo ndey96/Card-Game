@@ -13,14 +13,26 @@
     
     int score = 0;
     
-    if ([otherCards count] == 1){
-        PlayingCard *otherCard = [otherCards firstObject];
-            if (self.suit == otherCard.suit) {
-                score = 1;
-            } else if (self.rank == otherCard.rank){
-                score = 4;
-            }
+    for(PlayingCard *otherCard in otherCards){
+        if (self.rank == otherCard.rank) {
+            score += 4;
+        } else if (self.suit == otherCard.suit){
+            score += 1;
+        }
     }
+    
+    NSMutableArray *otherCardsInCollection = [[NSMutableArray alloc] init];
+    for (PlayingCard *otherCard in otherCardsInCollection){
+        [otherCardsInCollection removeObject:otherCard];
+        for (PlayingCard *anotherCard in otherCardsInCollection){
+            if (otherCard.rank == anotherCard.rank){
+                score += 4;
+            } else if ([otherCard.suit isEqualToString:anotherCard.suit]){
+                score += 1;
+            }
+        }
+    }
+    
     return score;
 }
 

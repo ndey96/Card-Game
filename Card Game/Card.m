@@ -25,7 +25,6 @@
     for (Card* card in otherCards){
         if([card.contents isEqualToString:self.contents]){
             score = 1;
-            NSLog(@"%@", self.contents);
         }
     }
     return score;

@@ -48,45 +48,58 @@ static const int COST_TO_CHOOSE = 1;
         if (card.isChosen){
             card.isChosen = NO;
         } else {
-            if (self.matchMode == 2){
-                //2 card matching
-                for (Card *otherCard in self.cards){
-                    if(otherCard.isChosen && !otherCard.isMatched){
-                        int matchScore = [card match:@[otherCard]];
-                        if (matchScore){
-                            self.score += matchScore * MATCH_BONUS;
-                            card.isMatched = YES;
-                            otherCard.isMatched = YES;
-                        } else {
-                            self.score -= MISMATCH_PENALTY;
-                            card.isChosen = NO;
-                            otherCard.isChosen = NO;
-                        }
-                        break;
-                    }
+            //check if cards match
+            
+            //create array of cards currently chosen
+            NSMutableArray *currentCardsChosen = [[NSMutableArray alloc] init];
+            for (Card *otherCard in self.cards){
+                if (otherCard.isChosen && !otherCard.isMatched){
+                    [currentCardsChosen addObject:otherCard];
                 }
-            } else if (self.matchMode == 3){
-                //3 card matching
-                for (Card *firstCard in self.cards){
-                    for (Card *secondCard in self.cards){
-                        if(firstCard.isChosen && !firstCard.isMatched && secondCard.isChosen && !secondCard.isMatched){
-                            int matchScore = [card match:@[firstCard, secondCard]];
-                            if (matchScore){
-                                self.score += matchScore * MATCH_BONUS;
-                                card.isMatched = YES;
-                                firstCard.isMatched = YES;
-                                secondCard.isMatched = YES;
-                            } else {
-                                self.score -= MISMATCH_PENALTY;
-                                card.isChosen = NO;
-                                firstCard.isChosen = NO;
-                                secondCard.isChosen = NO;
-                            }
-                            break;
-                        }
+            }
+            
+            if ([currentCardsChosen count] == self.matchMode - 1){
+                int matchScore = [card match:currentCardsChosen];
+                NSLog(@"%i", matchScore);
+                if (matchScore){
+                    NSLog(@"rekt");
+                    self.score += matchScore * MATCH_BONUS;
+                    for (Card *otherCard in currentCardsChosen){
+                        otherCard.isMatched = YES;
+                    }
+                    card.isMatched = YES;
+                } else {
+                    self.score -= MISMATCH_PENALTY;
+                    for (Card *otherCard in currentCardsChosen){
+                        otherCard.isChosen = NO;
                     }
                 }
             }
+
+//            NSMutableArray *currentChosenCards = [[NSMutableArray alloc] init];
+//            for (Card *otherCard in self.cards) {
+//                if (otherCard.isChosen && !otherCard.isMatched) {
+//                    [currentChosenCards addObject:otherCard];
+//                }
+//            }
+//            
+//            if ([currentChosenCards count] == self.matchMode-1) {
+//                int matchScore = [card match:currentChosenCards];
+//                if (matchScore) {
+//                    self.score += matchScore * MATCH_BONUS;
+//                    for (Card *otherCard in currentChosenCards) {
+//                        otherCard.isMatched = YES;
+//                    }
+//                    card.isMatched = YES;
+//                } else {
+//                    self.score -= MISMATCH_PENALTY;
+//                    for (Card *otherCard in currentChosenCards) {
+//                        otherCard.isChosen = NO;
+//                    }
+//                }
+//            }
+
+            
             self.score -= COST_TO_CHOOSE;
             card.isChosen = YES;
         }
