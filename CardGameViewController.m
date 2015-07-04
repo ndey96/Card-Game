@@ -22,23 +22,20 @@
 
 @implementation CardGameViewController
 
-- (IBAction)matchModeSegmentedControlAction:(id)sender {
-    if (self.matchModeSegmentedControl.selectedSegmentIndex == 0){
-        //2 card match
-        NSLog(@"2 card match mode");
-        self.game.matchMode = 2;
-    } else if (self.matchModeSegmentedControl.selectedSegmentIndex == 1){
-        //3 card match
-        NSLog(@"3 card match mode");
-        self.game.matchMode = 3;
-    } else {
-        
-    }
-    
-}
-
-
-
+//- (IBAction)matchModeSegmentedControlAction:(id)sender {
+//    if (self.matchModeSegmentedControl.selectedSegmentIndex == 0){
+//        //2 card match
+//        NSLog(@"2 card match mode");
+//        self.game.matchMode = 2;
+//    } else if (self.matchModeSegmentedControl.selectedSegmentIndex == 1){
+//        //3 card match
+//        NSLog(@"3 card match mode");
+//        self.game.matchMode = 3;
+//    } else {
+//        
+//    }
+//    
+//}
 
 
 - (IBAction)touchResetButton:(id)sender {
@@ -48,7 +45,9 @@
 }
 
 - (CardMatchingGame*)game{
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    if (!_game){
+        _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    }
 return _game;
 }
 

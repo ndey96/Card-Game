@@ -48,21 +48,43 @@ static const int COST_TO_CHOOSE = 1;
         if (card.isChosen){
             card.isChosen = NO;
         } else {
-            //match against another card
-            for (Card *otherCard in self.cards){
-                if(otherCard.isChosen && !otherCard.isMatched){
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore){
-                        self.score += matchScore * MATCH_BONUS;
-                        card.isMatched = YES;
-                        otherCard.isMatched = YES;
-                    } else {
-                        self.score -= MISMATCH_PENALTY;
-                        card.isChosen = NO;
-                        otherCard.isChosen = NO;
-                        
+            if (self.matchMode == 2){
+                //2 card matching
+                for (Card *otherCard in self.cards){
+                    if(otherCard.isChosen && !otherCard.isMatched){
+                        int matchScore = [card match:@[otherCard]];
+                        if (matchScore){
+                            self.score += matchScore * MATCH_BONUS;
+                            card.isMatched = YES;
+                            otherCard.isMatched = YES;
+                        } else {
+                            self.score -= MISMATCH_PENALTY;
+                            card.isChosen = NO;
+                            otherCard.isChosen = NO;
+                        }
+                        break;
                     }
-                    break;
+                }
+            } else if (self.matchMode == 3){
+                //3 card matching
+                for (Card *firstCard in self.cards){
+                    for (Card *secondCard in self.cards){
+                        if(firstCard.isChosen && !firstCard.isMatched && secondCard.isChosen && !secondCard.isMatched){
+                            int matchScore = [card match:@[firstCard, secondCard]];
+                            if (matchScore){
+                                self.score += matchScore * MATCH_BONUS;
+                                card.isMatched = YES;
+                                firstCard.isMatched = YES;
+                                secondCard.isMatched = YES;
+                            } else {
+                                self.score -= MISMATCH_PENALTY;
+                                card.isChosen = NO;
+                                firstCard.isChosen = NO;
+                                secondCard.isChosen = NO;
+                            }
+                            break;
+                        }
+                    }
                 }
             }
             self.score -= COST_TO_CHOOSE;
