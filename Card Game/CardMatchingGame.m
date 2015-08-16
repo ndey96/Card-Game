@@ -13,6 +13,7 @@
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic) NSMutableArray *cards;
 @property (nonatomic, readwrite) NSInteger flipCount;
+@property (nonatomic, readwrite) NSString *status;
 
 @end
 
@@ -50,6 +51,8 @@ static const int COST_TO_CHOOSE = 1;
     self.flipCount++;
     
     Card* card = [self cardAtIndex:index];
+    self.status = [NSString stringWithFormat:@"You chose %@", card.contents];
+    
     if (!card.isMatched){
         if (card.isChosen){
             card.isChosen = NO;
@@ -58,12 +61,16 @@ static const int COST_TO_CHOOSE = 1;
             
             //create array of cards currently chosen
             NSMutableArray *currentCardsChosen = [[NSMutableArray alloc] init];
+            NSMutableString *stringOfCurrentCardsChosen = [[NSMutableString alloc] init];
             for (Card *otherCard in self.cards){
                 if (otherCard.isChosen && !otherCard.isMatched){
                     [currentCardsChosen addObject:otherCard];
+                    [stringOfCurrentCardsChosen appendFormat:@"%@ ", otherCard.contents];
                 }
             }
+            [stringOfCurrentCardsChosen appendFormat:@" %@ ", card.contents];
             
+            //checks if cards match and adjusts score accordingly
             if ([currentCardsChosen count] == self.matchMode - 1){
                 int matchScore = [card match:currentCardsChosen];
                 if (matchScore){
@@ -72,14 +79,16 @@ static const int COST_TO_CHOOSE = 1;
                         otherCard.isMatched = YES;
                     }
                     card.isMatched = YES;
+                    self.status = [NSString stringWithFormat:@"Matched %@ for %i points", stringOfCurrentCardsChosen, matchScore*MATCH_BONUS];
+                    
                 } else {
                     self.score -= MISMATCH_PENALTY;
                     for (Card *otherCard in currentCardsChosen){
                         otherCard.isChosen = NO;
                     }
+                    self.status = [NSString stringWithFormat:@"%@ dont match! %i point penalty!", stringOfCurrentCardsChosen, MISMATCH_PENALTY];
                 }
             }
-            
             self.score -= COST_TO_CHOOSE;
             card.isChosen = YES;
         }

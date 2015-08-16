@@ -17,6 +17,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *matchModeSegmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *gameStatusLabel;
 
 
 @end
@@ -57,6 +58,7 @@
         [self.matchModeSegmentedControl setSelectedSegmentIndex:0];
     }
     
+    //update card appearance
     for (UIButton *cardButton in self.cardButtons){
         NSUInteger cardIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardIndex];
@@ -64,7 +66,14 @@
         [cardButton setBackgroundImage:[self backgroundImageForCard:card] forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
+    //update score label
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+    //update game status label
+    if (self.game.status){
+        self.gameStatusLabel.text = [NSString stringWithFormat:@"Status: %@", self.game.status];
+    } else {
+        self.gameStatusLabel.text = @"Status";
+    }
 }
 
 - (NSString*)titleForCard:(Card*)card{
